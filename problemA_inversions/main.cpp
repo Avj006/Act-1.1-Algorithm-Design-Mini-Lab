@@ -41,7 +41,15 @@ int main() {
 
     // Sort the list and count inversions
     lista.mergeSort();
-
+    
+    // --- Código temporal para verificar el orden ---
+    MyNoodoLL* actual = lista.head;
+    while (actual != nullptr) {
+        cout << actual->data << " ";
+        actual = actual->next;
+    }
+    cout << "\n";
+    // -----------------------------------------------
     /* 
     Pseudocode
     8. Return counter
