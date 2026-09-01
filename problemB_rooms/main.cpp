@@ -1,23 +1,10 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <queue>
 
 using namespace std;
 /*
-4. Sort (ascending meetings' start times)
-	sort(meetings_v, based_on = start_time)
-5. Initialize Min Heap
-	min_heap = empty_array()
-6. Loop: to iterate through vector for meetings. For each meeting, look at the root of the Min Heap (room that has a vacancy the earliest).
-	for current_meeting in meetings_v:
-6.1. If this room's end time is less than or equal to the current meeting's start time, the room is vacant. Pop it from the heap.
-		if (min_heap.length > 0) and (min_heap[0] <= 
-current_meeting.start): Heap_Pop(min_heap)
-6.2. Insert (push) the current meeting's ending time into the Min Heap. This signifies that a room (recycled one/new one) is now occupied.
-		Heap_Push(min_heap, current_meeting.end)
-9. End of loop. Min heap -> has total number of rooms needed (minimum). Return size/number of elemnts in the heap.
-		return min_heap.length
-
 //Auxiliary Heap Operations Pseudocode -> done automatically by the C++ heap (yet just for visualization purposes)
 
 #1 - Function Heap_Pop(heap_array):
@@ -71,7 +58,7 @@ heap_array.append(new_element)
         	else:
             		break
  */
-vector<pair<int, int>> rooms_v;
+vector<pair<int, int>> meetings_v;
 int main(){
     /*
     1. Recieve number. Save it as m, which represents the total number of meetings.
@@ -87,16 +74,38 @@ int main(){
    for (int i = 0; i < m; i++) {
         pair<int, int> meetingSchedule;
         cin >> meetingSchedule.first >> meetingSchedule.second;
-        rooms_v.push_back(meetingSchedule);
+        meetings_v.push_back(meetingSchedule);
     }
     /*
     4. Sort (ascending meetings' start times) sort(meetings_v, based_on = start_time)
     */
-    sort(rooms_v.begin(), rooms_v.end());
-
-    for (const auto& meeting : rooms_v) {
-        cout << "[" << meeting.first << ", " << meeting.second << "]\n";
-    }
-
-
+    sort(meetings_v.begin(), meetings_v.end());
+	/*
+	5. Initialize Min Heap min_heap = empty_array()
+	*/
+	priority_queue<int, vector<int>, greater<int>> rooms_heap; //min-heap in c++
+	/*
+	6. Loop: to iterate through vector for meetings. For each meeting, look at the root of 
+	the Min Heap (room that has a vacancy the earliest). for current_meeting in meetings_v:
+	*/
+	for (int i=0; i < m; i++){
+		/*
+		6.1. If this room's end time is less than or equal to the current meeting's start time, 
+		the room is vacant. Pop it from the heap.if (min_heap.length > 0) and (min_heap[0] <= 
+		current_meeting.start): Heap_Pop(min_heap)
+		*/
+		if (!rooms_heap.empty() && rooms_heap.top() <= meetings_v[i].first) {
+			rooms_heap.pop();
+		}
+		/*
+		6.2. Insert (push) the current meeting's ending time into the Min Heap. This signifies that 
+		a room (recycled one/new one) is now occupied. Heap_Push(min_heap, current_meeting.end)
+		*/
+		rooms_heap.push(meetings_v[i].second);
+		/*
+		7. End of loop. Min heap -> has total number of rooms needed (minimum). Return size/number of
+		elemnts in the heap. return min_heap.length
+		*/
+	}
+	cout<<rooms_heap.size()<<endl;
 };
