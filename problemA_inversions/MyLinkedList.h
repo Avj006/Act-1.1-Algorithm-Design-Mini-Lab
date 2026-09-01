@@ -9,8 +9,9 @@ Some code adpatation from Act 2.3 - Actividad Integral estructura de datos linea
 #include <iostream>
 
 using namespace std;
+using ll = long long;
 
-extern long long counter_inversions; //we use extern since the porblem A has more than 1 file and we need a global accesible value for this counter
+extern ll counter_inversions; //we use extern since the porblem A has more than 1 file and we need a global accesible value for this counter
 
 struct MyNoodoLL {
     int data; 

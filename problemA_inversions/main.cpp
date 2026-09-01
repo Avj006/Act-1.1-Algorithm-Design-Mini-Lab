@@ -13,7 +13,7 @@ Pseudocode
 4. Initialize global counter (for inversions)
 counter_inversions = 0
 */
-long long counter_inversions = 0;
+ll counter_inversions = 0;
 
 
 int main() {
