@@ -15,6 +15,7 @@ counter_inversions = 0
 */
 long long counter_inversions = 0;
 
+
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
@@ -39,23 +40,12 @@ int main() {
         lista.insertLast(val); // Pseudocode 3: Call insertLast(input) for each element read
     }
 
-    // Sort the list and count inversions
-    lista.mergeSort();
-    
-    // --- Código temporal para verificar el orden ---
-    MyNoodoLL* actual = lista.head;
-    while (actual != nullptr) {
-        cout << actual->data << " ";
-        actual = actual->next;
-    }
-    cout << "\n";
-    // -----------------------------------------------
     /* 
     Pseudocode
     8. Return counter
     */
-    // TODO: Print counter_inversions
-    // cout << counter_inversions << "\n";
-
+    
+    //cout <<"Invertions found: "<<counter_inversions<< endl;
+    cout <<counter_inversions<< endl;
     return 0;
 }

@@ -123,10 +123,18 @@ MyNoodoLL* MyLinkedList::merge(MyNoodoLL* left, MyNoodoLL* right, MyNoodoLL*& ou
     Pseudocode
     while (left != null and right != null):
     */
+   int inversions = 0;
+   MyNoodoLL* temp = left;
+   while (temp != nullptr) {
+    inversions++;
+    temp = temp->next;
+    }
+
     while (left != nullptr && right != nullptr) {
         if (left->data <= right->data) {
             current->next = left;
             left = left->next;
+            inversions--;
         } else {
             current->next = right;
             right = right->next;
@@ -137,6 +145,7 @@ MyNoodoLL* MyLinkedList::merge(MyNoodoLL* left, MyNoodoLL* right, MyNoodoLL*& ou
             counter_inversions = counter_inversions + length(left)
             */
             // TODO: Add the number of remaining nodes in 'left' to the global counter
+            counter_inversions += inversions;
         }
         current = current->next;
     }
