@@ -108,4 +108,5 @@ int main(){
 		*/
 	}
 	cout<<rooms_heap.size()<<endl;
+	return 0;
 };
