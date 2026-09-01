@@ -34,20 +34,30 @@ int main() {
     value: learning benefit (the optimal). Index: time capacity. dp = empty_array(size = 
     max_t + 1, fill = 0)
     */
-    vector<int> dp(max_t + 1, 0);
+    vector<int> vector_dp(max_t + 1, 0);
     /*
     4. Outer loop: to receive and evaluate each module one by one on-the-fly, extracting its
     specific required time and yielded value without storing them in a separate data structure.
 	for i from 0 to n - 1:
 		current_time, current_value = read_two_integers()
     */
-   for (int i=0;i<n;i++){
-	int module_time, module_value;
-        cin >> module_time >> module_value;
-   }
-   /*
-   5. Inner loop: DP backwards (from the absolute limit max_t down to the current module's 
-   required time).
-		for w from max_t down to current_time:
+   for (int i = 0; i < n; i++) {
+    int module_time, module_value;
+    cin >> module_time >> module_value; 
+    /*
+    5. Inner loop: DP backwards (anidado adentro para usar module_time y module_value)
     */
-}
+    for (int j = max_t; j >= module_time; j--) {
+        /*
+        6. Update current position inside the inner loop.
+        */
+        vector_dp[j] = max(vector_dp[j], vector_dp[j - module_time] + module_value); //max value of either give or take
+    }
+    } 
+    /*
+    7. Once finished, the absolute maximum of learning benefit should be found at the last index (of the array). Return it.
+        return dp[max_t]
+    */
+    cout << vector_dp[max_t] << endl; //benefit during max time -> chooses the best outcome
+    return 0;
+};
